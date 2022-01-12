@@ -71,7 +71,7 @@ def upload():
             flash('Image successfully uploaded and displayed below')
             return render_template('upload.html', filename=filename)
         else:
-            flash('Allowed image types are -> png, jpg, jpeg, gif')
+            flash('Allowed image types are -> png, jpg, jpeg')
             return redirect(request.url)
     else:
         return render_template("upload.html")
@@ -98,7 +98,7 @@ def search():
             images = query_db('SELECT * FROM images WHERE id IN ({})'.format(','.join(map(str, ids))))    
             return render_template('index.html', images=images)
         else:
-            flash('Allowed image types are -> png, jpg, jpeg, gif')
+            flash('Allowed image types are -> png, jpg, jpeg')
             return redirect(request.url)
     else:
         ids = ann.text_search(request.args['search'])
