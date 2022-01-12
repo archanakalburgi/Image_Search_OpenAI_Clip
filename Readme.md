@@ -19,6 +19,9 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 # Doubts
 - Not sure how well the image search is going to look like
 
+# Why annoy 
+
+# Auth is tricy
 # Limitations
 - Batch based, annoy tree cannot be updated in real time.
 
