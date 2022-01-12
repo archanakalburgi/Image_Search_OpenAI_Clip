@@ -1,2 +1,5 @@
 static/images
 static/uploads
+.DS_Store
+src/__pycache__
+downloaded_images
