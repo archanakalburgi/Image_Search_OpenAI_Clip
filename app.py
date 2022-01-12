@@ -12,6 +12,9 @@ app = Flask(__name__)
 app.secret_key = "secret key"
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = config.IMAGES_UPLOAD_PATH
+app.config['USER_UPLOAD_FOLDER'] = config.USER_UPLOAD_FOLDER
+app.config['USER_SEARCH_IMAGE'] = config.USER_SEARCH_IMAGE
+
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -63,10 +66,9 @@ def upload():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            file.save(os.path.join(app.config['USER_UPLOAD_FOLDER'], filename))
             #print('upload_image filename: ' + filename)
             flash('Image successfully uploaded and displayed below')
-            return "uploaded"
             return render_template('upload.html', filename=filename)
         else:
             flash('Allowed image types are -> png, jpg, jpeg, gif')
@@ -87,7 +89,7 @@ def search():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file_saved_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            file_saved_path = os.path.join(app.config['USER_SEARCH_IMAGE'], filename)
             file.save(file_saved_path)
             #print('upload_image filename: ' + filename)
             flash('Image successfully uploaded and displayed below')
