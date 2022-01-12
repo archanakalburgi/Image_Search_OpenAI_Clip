@@ -2,68 +2,133 @@ import torch
 import clip
 from PIL import Image
 import os
-import skimage
 from annoy import AnnoyIndex
-import time
 import sqlite3
+import src.config as config
+from datetime import datetime
 
-images_path  = os.path.join(os.path.dirname(__file__), 'downloaded_images/images/small/00/')
-vector_len = 512
-image_vectors = AnnoyIndex(vector_len, 'angular')  # Length of item vector that will be indexed
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-image_files = [
-    filename
-    for filename in os.listdir(images_path)
-    if filename.endswith(".png") or filename.endswith(".jpg")
-]
-print(f"Processing {len(image_files)} images")
+import logging
+# logging.basicConfig(filename='data_pipeline.log',level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG)
+import shutil
 
 
+"""
+inputs - path_image_folder, path_annoy_index, path_database
+"""
 
-connection = sqlite3.connect('database.db')
-cur = connection.cursor()
 
-model, preprocess = clip.load("ViT-B/32")
+def _get_database_connection(database_path):
+    conn = sqlite3.connect(database_path)
+    return conn
 
-image_mapping = {}
 
-for idx, filename in enumerate(image_files):
-    image_path = os.path.join(images_path, filename)
-    image = preprocess(Image.open(image_path).convert("RGB")).unsqueeze(0).to(device)
-    image_vector = torch.tensor(image).to(device)
-    with torch.no_grad():
-        output = model.encode_image(image_vector).float()
-        out_vec = output.tolist()[0]
-        image_vectors.add_item(idx, out_vec)
-        image_mapping[idx] = filename
-        cur.execute("INSERT INTO images (id, title, image_path) VALUES (?, ?, ?)",
-            (idx, filename, filename)
+def _create_database(conn, schema_file_path):
+    logging.info("Creating database")
+    with open(schema_file_path, 'r') as f:
+        conn.executescript(f.read())
+    conn.commit()
+    logging.info("Database created")
+def _get_images_from_folder(image_folder_path):
+    image_files = [
+        filename
+        for filename in os.listdir(image_folder_path)
+        if filename.endswith(".png") or filename.endswith(".jpg")
+    ]
+    logging.info(f"{len(image_files)} images found in {image_folder_path}")
+    return image_files
+
+
+images_path = os.path.join(
+    os.path.dirname(__file__), "downloaded_images/images/small/00/"
+)
+
+
+def _generate_vector_from_image(images, clip_model, model_preprocess):
+    for image in images:
+        image_path = os.path.join(images_path, filename) # move this to _get_images_from_folder
+        image = model_preprocess(Image.open(image_path).convert("RGB")).unsqueeze(0).to("cpu")
+        image_vector = torch.tensor(image).to("cpu")
+        vectors = []
+        with torch.no_grad():
+            output = clip_model.encode_image(image_vector).float()
+            out_vec = output.tolist()[0]
+            vectors.append(out_vec)
+    return vectors
+
+
+def _write_vectors_and_images(conn, vectors, images, annoy_index_path):
+    """
+    Write vectors and images paths to database along with Index
+    Index needs to be constext across annoy index and the database, that is how we are doing to refer to it later.
+
+    """
+    annoy_index = AnnoyIndex(config.VECTOR_SIZE, "angular")
+    for idx, (vector, image) in enumerate(zip(vectors, images)):
+        annoy_index.add_item(idx, vector)
+        conn.execute(
+            "INSERT INTO images (id, title, image_path) VALUES (?, ?, ?)",
+            (idx, image, image),
         )
+    conn.commit()
+    logging.info(f"Writing {len(vectors)} vectors to annoy index at {config.INDEX_PATH}")
+    annoy_index.build(300)
+    annoy_index.save(config.INDEX_PATH)
+    return
+    
+
+def _date_suffix(): #TODO test this
+    back_folder_date = datetime.now().strftime("%Y_%m_%d")
+    back_folder_hour = datetime.now().strftime("%M") # TODO: change this to %H after testing
+    return back_folder_date + "/" + back_folder_hour
+
+def _backup_path(asset): #TODO test this
+    backup_path = os.path.join(config.BACK_UP_PATH + "/" + asset + "/", _date_suffix())
+    return backup_path
+
+def _if_file_exists_backup(file_or_dir, asset):
+    """
+    asset - db file or annoy index or images
+    """
+
+    if os.path.exists(file_or_dir):
+        backup_path = _backup_path(asset)
+        logging.info(f"Backing up {asset} to {backup_path}")
+        os.makedirs(f"{backup_path}", exist_ok=True)
+        try:
+            shutil.move(file_or_dir, backup_path) #If the samefile exists, it will be overwritten.?
+            logging.info(f"Backup {file_or_dir} to {backup_path} successful")
+            return
+        except shutil.Error as e:
+            logging.error(f"Could not move {file_or_dir} to {backup_path} - {e}")
+    else:
+        logging.info(f"{file_or_dir} does not exist. Nothing to backup")
+        return
+    
+    # if os.path.exists(file_path):
+    #     os.makedirs(f"{file_path}.bak", exist_ok=True)
+    #     shutil.copy(file_path, file_path + ".bak")
+    #     logging.info(f"{file_path} exists, backing up to {file_path}.bak")
 
 
-image_vectors.build(300) # 10 trees
-image_vectors.save('test.ann')
-connection.commit()
-connection.close()
 
-print("Done, not sleeping for a while")
-time.sleep(1)
+def main():
+    """
+    Please make sure config.py is set up correctly.
+    """
+    logging.info("Starting data pipeline")
+    _if_file_exists_backup(config.DATABASE_PATH, "database") 
+    _if_file_exists_backup(config.IMAGES_UPLOAD_PATH, "images")    
+    conn = _get_database_connection(config.DATABASE_PATH)
+    _create_database(conn, config.SQL_SCRIPT_PATH)
+    # images = _get_images_from_folder(images_path)
 
-print("Loading index")
-u = AnnoyIndex(vector_len, 'angular')
-u.load('test.ann') # super fast, will just mmap the file
+    # model, preprocess = clip.load("ViT-B/32")
+    # vectors = _generate_vector_from_image(images, model, preprocess)
+    # _write_vectors_and_images(conn, vectors, images, config.INDEX_PATH)
+    # conn.close()
+    # return
 
 
-text_to_search = ["chairs"]
-text_tokens = clip.tokenize(["This is " + desc for desc in text_to_search])
-
-with torch.no_grad():
-    text_vec = model.encode_text(text_tokens).float()
-
-
-idx = u.get_nns_by_vector(text_vec.tolist()[0], 15)
-for id in idx:
-    print(f"Found {image_mapping[id]}")
-
-        
+if __name__ == "__main__":
+    main()

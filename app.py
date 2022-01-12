@@ -1,18 +1,20 @@
-from flask import Flask, render_template, flash, request, redirect,url_for
+from flask import Flask, config, render_template, flash, request, redirect,url_for
 from werkzeug.utils import secure_filename
 import os
 import src.anny_search as ann
 import sqlite3
 from flask import g
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-UPLOAD_FOLDER = 'static/uploads/search_query/'
+
+import src.config as config
+
 
 app = Flask(__name__)
 app.secret_key = "secret key"
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+UPLOAD_FOLDER = 'static/uploads/search_query/'
 
 DATABASE = 'database.db'
 
@@ -105,4 +107,5 @@ def search():
         return render_template('index.html', images=images)
 
 if __name__ == '__main__':
+    os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
     app.run(debug=True)

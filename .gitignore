@@ -3,3 +3,5 @@ static/uploads
 .DS_Store
 src/__pycache__
 downloaded_images
+backups
+*.log
