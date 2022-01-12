@@ -48,8 +48,8 @@
         {% for image in images%}
         <div class="col-md-3">
             <div class="thumbnail border">
-                <a href="static/uploads/{{ image['image_path'] }}" target="_blank">
-                    <img src="static/uploads/{{ image['image_path'] }}" alt="Lights" style="width:100%">
+                <a href="{{ image['image_path'] }}" target="_blank">
+                    <img src="{{ image['image_path'] }}" alt="Lights" style="width:100%">
                     <div class="caption">
                         <!-- <p>{{ image['title'] }}</p> -->
                     </div>
