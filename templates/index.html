@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+  <ul>
+  {% for message in messages %}
+    
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+  </ul>
+{% endif %}
+{% endwith %}
+
+<div class="container">
+
+    <div class="row shadow p-3 mb-5 bg-white rounded" >
+        <div class="col-md-6">
+            <legend>Search By Text</legend>
+            <form method="get" action="/search" enctype="multipart/form-data" class="shadow p-3 mb-5 bg-white rounded">
+                <div class="mb-3">
+                    <input type="text" name="search" class="form-control" autocomplete="off" placeholder="eg shoe" required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <legend>Search by Image</legend>
+            <form method="POST" action="/search" enctype="multipart/form-data" class="shadow p-3 mb-5 bg-white rounded">
+                <div class="mb-3">
+                    <input type="file" name="file" class="form-control" autocomplete="off" placeholder="Search Product by image"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for image in images%}
+        <div class="col-md-3">
+            <div class="thumbnail border">
+                <a href="static/uploads/{{ image['image_path'] }}" target="_blank">
+                    <img src="static/uploads/{{ image['image_path'] }}" alt="Lights" style="width:100%">
+                    <div class="caption">
+                        <!-- <p>{{ image['title'] }}</p> -->
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

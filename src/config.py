@@ -1,0 +1,1 @@
+VECTOR_SIZE = 512

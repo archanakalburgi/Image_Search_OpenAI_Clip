@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<h1>{% block title %} Upload image to Image Repo{% endblock %}</h1>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+{% if filename %}
+<div>
+    <img src="{{ url_for('display_image', filename=filename) }}">
+</div>
+{% endif %}
+
+<div class="col-md-12">
+    <legend>Upload to Image Repo </legend>
+    <form method="post" action="/upload" enctype="multipart/form-data" class="shadow p-3 mb-5 bg-white rounded">
+
+        <div class="mb-3">
+            <input type="text" name="title" autocomplete="off" required class="form-control" placeholder="Title of Image">
+        </div>
+
+        <div class="mb-3">
+            <input type="text" name="description" autocomplete="off" required class="form-control" placeholder="Description">
+        </div>
+
+        <div class="mb-3">
+            <input type="file" name="file" autocomplete="off" required class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+{% endblock %}
