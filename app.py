@@ -43,7 +43,7 @@ def allowed_file(filename):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    images = query_db('SELECT * FROM images')
+    images = query_db('SELECT * FROM images limit 16')
     return render_template('index.html', images=images)
 
 @app.route('/display/<filename>')
