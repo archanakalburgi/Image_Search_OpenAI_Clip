@@ -36,6 +36,7 @@ Store all the image feature in to annoy tree and save the file on to the disk.
     - [ ] Heroku deployment (may be)
 
 
+
 ## Assumptions
 - Do not send over a lager setup instructions over, it might no work.
 - Should be able to run the project in 10 min. 
@@ -48,6 +49,8 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 ```
 python3 scripts/create_db.py
 ```
+2. Run via docker
+docker run  -p 5550:5550 image-search
 # Doubts
 - Not sure how well the image search is going to look like
 

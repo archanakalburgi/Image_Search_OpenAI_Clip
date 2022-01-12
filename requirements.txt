@@ -11,7 +11,7 @@ cffi==1.15.0
 chardet==4.0.0
 charset-normalizer==2.0.10
 click==8.0.3
-clip==1.0
+git+https://github.com/openai/CLIP.git#egg=clip
 cookiecutter==1.7.3
 dnspython==2.1.0
 Faker==11.3.0
