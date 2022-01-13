@@ -26,4 +26,4 @@ on Mac 5000 is used by control center. So using a differt port.
 
 # Python installation might ne a issuse esp to use clip which requires come dev tools right
 ## Lza - Not Found error
-Can be fixed by  PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.10
+Fixed by  PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.10
