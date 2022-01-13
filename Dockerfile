@@ -9,6 +9,6 @@ WORKDIR /app
 RUN pip install -r requirements.txt
 
 COPY . .
-EXPOSE 5550
+EXPOSE 5050
 CMD [ "python", "app.py" ]
 

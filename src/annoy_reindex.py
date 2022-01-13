@@ -65,7 +65,7 @@ def reindex_annoy_and_update_database(images):
     conn = sqlite3.connect(config.DATABASE_PATH)
     # images = _get_images_from_folder_to_staged(images_path, config.IMAGES_UPLOAD_PATH)
     print("got so many", len(images))
-    model, preprocess = clip.load("ViT-B/32")
+    model, preprocess = clip.load("ViT-B/32", download_root=config.MODEL_DOWNLOAD_PATH)
     vectors = _generate_vector_from_image(images, model, preprocess)
     _write_vectors_and_images(conn, vectors, images)
     conn.close()

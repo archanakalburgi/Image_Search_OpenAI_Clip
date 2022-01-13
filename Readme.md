@@ -8,8 +8,6 @@ pip install scikit-image
 
 
 
-# boo - has to do this to get the lza working
- PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.10
 
 # Plan
 Store all the image feature in to annoy tree and save the file on to the disk. 
@@ -35,10 +33,10 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 - [x] Deployment 
     - [x] local server setup instructions
     - [x] DockerFile so that it is easy to get the application running.
-    - [ ] Heroku deployment (may be)
+    - [x] Heroku deployment - deployed to digital ocean instead of heroku
 
 ### V2
-- [ ] Automate index creation
+- [ ] Automate index creation when new images are added to the repo.
 - [ ] Use fast API to get, so that API can be used by other projects
 - [ ] React App would be nice.
 

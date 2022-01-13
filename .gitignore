@@ -6,3 +6,4 @@ downloaded_images
 backups
 *.log
 static/processed
+models

@@ -107,4 +107,4 @@ def search():
 
 if __name__ == '__main__':
     os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
-    app.run(debug=True, host='0.0.0.0', port=5550)
+    app.run(debug=True, host='0.0.0.0', port=5050)
