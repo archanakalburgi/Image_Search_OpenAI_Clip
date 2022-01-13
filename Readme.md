@@ -17,24 +17,30 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 
 
 ## Implementation Plan
+### V1
 - [x] Make sure the plan is doable MVP (in ipynb)
     - [x] Annoy tree store and retrive - done
     - [x] Image feature extraction - done
     - [x] Image search is it any good? - Good, as far as we have good amount of images indexed
-- [ ] Back End - (Using flask)
-    - [ ] API to search
-    - [ ] API to upload image for search
-    - [ ] API to add images to repo(may be)
-- [ ] Front End - (Using boot strap)
-    - [ ] Grid of images limit to 16 images a page
-    - [ ] Search text box
-    - [ ] Search image box 
+- [x] Back End - (Using flask)
+    - [x] API to search - Building a react app would be nice, but tome consuming. So using Flask Views
+    - [x] API to upload image for search - Done
+    - [X] API to add images to repo(may be) - 
+            Images can be uploaded by the user to index. But index is batch based, would need be done by the user. In future we can add a airflow job to run every hour to keep the index updated. 
+- [x] Front End - (Using boot strap)
+    - [x] Grid of images limit to 16 images a page
+    - [x] Search text box
+    - [x] Search image box 
     - [ ] Make it look like, an adult made it. 
-- [ ] Deployment 
-    - [ ] local server setup instructions
-    - [ ] DockerFile so that it is easy to run
+- [x] Deployment 
+    - [x] local server setup instructions
+    - [x] DockerFile so that it is easy to get the application running.
     - [ ] Heroku deployment (may be)
 
+### V2
+- [ ] Automate index creation
+- [ ] Use fast API to get, so that API can be used by other projects
+- [ ] React App would be nice.
 
 
 ## Assumptions
