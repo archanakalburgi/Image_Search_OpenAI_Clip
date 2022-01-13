@@ -13,30 +13,34 @@ import pathlib
 import logging
 import shutil
 from src import config
+import glob
 
 # logging.basicConfig(filename='reindex.log',level=logging.DEBUG)
 logging.basicConfig(level=logging.DEBUG)
 
-raw_images_path = "downloaded_images/images/small/00/"
+raw_images_path = "downloaded_images/images/small/"
 images_path = os.path.join(os.path.dirname(__file__), raw_images_path)
 path = pathlib.Path().resolve()
 
 
 initial_run = True
 
+
 def move_all_files_to_uploads(image_folder_path, dest_path):
     image_files = [
-        filename
-        for filename in os.listdir(image_folder_path)
-        if filename.endswith(".png") or filename.endswith(".jpg")
+        file
+        for file in list(glob.iglob(images_path + "**", recursive=True))
+        if file.endswith(".png") or file.endswith(".jpg")
     ]
     images_copy = []
     logging.info(f"{len(image_files)} images found in {image_folder_path}")
+
     # May be move them to staged, and then read from staged. which might be annothing
-    for image in image_files:
+    for image_file in image_files:
+        image = os.path.basename(image_file)
         dest_file = os.path.join(dest_path, image)
         if not os.path.exists(dest_file):
-            shutil.copyfile(os.path.join(image_folder_path, image), dest_file)
+            shutil.copyfile(os.path.join(image_file), dest_file)
             images_copy.append(dest_file)
     return images_copy
 
