@@ -17,10 +17,10 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 
 
 ## Implementation Plan
-- [ ] Make sure the plan is doable MVP (in ipynb)
-    - [ ] Annoy tree store and retrive
-    - [ ] Image feature extraction
-    - [ ] Image search is it any good?
+- [x] Make sure the plan is doable MVP (in ipynb)
+    - [x] Annoy tree store and retrive - done
+    - [x] Image feature extraction - done
+    - [x] Image search is it any good? - Good, as far as we have good amount of images indexed
 - [ ] Back End - (Using flask)
     - [ ] API to search
     - [ ] API to upload image for search
