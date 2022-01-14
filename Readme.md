@@ -1,14 +1,3 @@
-pyenv virtualenv 3.8.10 shop
-pyenv activate shop
-eval "$(pyenv init --path)"
-pip install annoy
-pip install ftfy regex tqdm
-pip install git+https://github.com/openai/CLIP.git
-pip install scikit-image
-
-
-
-
 # Plan
 Store all the image feature in to annoy tree and save the file on to the disk. 
 ![wd](plan.svg)
@@ -49,15 +38,8 @@ Store all the image feature in to annoy tree and save the file on to the disk.
     - Host it on heroku?
     - Make a docker image? so that it just runs (docker is everywhere?)
 
-# Running project
-1. Create database with schema from scripts folder
-```
-python3 scripts/create_db.py
-```
-2. Run via docker
-docker run  -p 5550:5550 image-search
-# Doubts
-- Not sure how well the image search is going to look like
+
+
 
 # Why annoy 
 
