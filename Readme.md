@@ -39,11 +39,12 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 - [ ] Automate index creation when new images are added to the repo.
 - [ ] Use fast API to get, so that API can be used by other projects
 - [ ] React App would be nice.
+- [ ] Host all image assets on GCS or Digital Ocean Storage  - Will also reduce the image size.
 
 
 ## Assumptions
-- Do not send over a lager setup instructions over, it might no work.
-- Should be able to run the project in 10 min. 
+- Should be able to see the work, without any installation.
+- Should be able to run the project in 10 min.  - docker or script
 - Should be able feel what this project is about without having to get the whole thing running
     - Host it on heroku?
     - Make a docker image? so that it just runs (docker is everywhere?)
