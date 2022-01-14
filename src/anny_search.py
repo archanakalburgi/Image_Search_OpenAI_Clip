@@ -8,7 +8,7 @@ from . import config
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 search_index = AnnoyIndex(config.VECTOR_SIZE, 'angular')  # Length of item vector that will be indexed
-search_index.load("src/test.ann") # this needs to be hot swappable, not sure how to do it.
+search_index.load(config.ANNOY_INDEX_PATH) # this needs to be hot swappable, not sure how to do it.
 model, preprocess = clip.load("ViT-B/32",download_root=config.MODEL_DOWNLOAD_PATH)
 
 #db connect

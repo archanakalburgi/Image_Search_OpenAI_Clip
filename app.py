@@ -92,7 +92,7 @@ def search():
             file_saved_path = os.path.join(app.config['USER_SEARCH_IMAGE'], filename)
             file.save(file_saved_path)
             #print('upload_image filename: ' + filename)
-            flash('Image successfully uploaded and displayed below')
+            flash('Image successfully uploaded, looking for similar images')
             print(file_saved_path)
             ids = ann.image_search(file_saved_path)
             images = query_db('SELECT * FROM images WHERE id IN ({})'.format(','.join(map(str, ids))))    
@@ -106,5 +106,5 @@ def search():
         return render_template('index.html', images=images)
 
 if __name__ == '__main__':
-    os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
+    os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True) # not good a good idea for production
     app.run(debug=True, host='0.0.0.0', port=5050)

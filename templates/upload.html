@@ -2,33 +2,45 @@
 
 
 {% block content %}
-<h1>{% block title %} Upload image to Image Repo{% endblock %}</h1>
+
+
 {% with messages = get_flashed_messages() %}
 {% if messages %}
-<ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
+  <ul>
+  {% for message in messages %}
+    
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+  </ul>
 {% endif %}
 {% endwith %}
 
 {% if filename %}
+<div class="alert alert-info" role="alert">
+    <p><b>Note:</b> This image will not appear in the search until the image embeddings are generated.  </p>
+    <hr>
+    <p class="mb-0">Follow the instructions in the docs/updated_index.md file. There is a plan to make it automated, which is also explained in the same file..</p>
+  </div>
 <div>
     <img src="{{ url_for('display_image', filename=filename) }}">
 </div>
 {% endif %}
 
+<br/>
 <div class="col-md-12">
-    <legend>Upload to Image Repo </legend>
     <form method="post" action="/upload" enctype="multipart/form-data" class="shadow p-3 mb-5 bg-white rounded">
-
+        <legend>Upload to Image Repo </legend>
         <div class="mb-3">
-            <input type="text" name="title" autocomplete="off" required class="form-control" placeholder="Title of Image">
+            <input type="text" name="title" autocomplete="off" required class="form-control"
+                placeholder="Title of Image">
         </div>
 
         <div class="mb-3">
-            <input type="text" name="description" autocomplete="off" required class="form-control" placeholder="Description">
+            <input type="text" name="description" autocomplete="off" required class="form-control"
+                placeholder="Description">
         </div>
 
         <div class="mb-3">
