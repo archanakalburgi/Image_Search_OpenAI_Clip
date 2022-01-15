@@ -4,8 +4,14 @@ import sqlite3
 import src.config as config
 from datetime import datetime
 import shutil
-
 import logging
+
+
+"""
+This is a helper script for developer. Not intended for production use.
+Script is useful to clean everything up and start fresh.
+Warning: Will move database, images and annoy index to backup folder.
+"""
 
 # logging.basicConfig(filename='data_pipeline.log',level=logging.DEBUG)
 logging.basicConfig(level=logging.DEBUG)
@@ -56,11 +62,6 @@ def _if_file_exists_backup(file_or_dir, asset):
     else:
         logging.info(f"{file_or_dir} does not exist. Nothing to backup")
         return
-
-    # if os.path.exists(file_path):
-    #     os.makedirs(f"{file_path}.bak", exist_ok=True)
-    #     shutil.copy(file_path, file_path + ".bak")
-    #     logging.info(f"{file_path} exists, backing up to {file_path}.bak")
 
 
 def main():
