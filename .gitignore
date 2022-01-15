@@ -9,3 +9,4 @@ static/processed
 models
 *.ann
 .vscode
+*/__pycache__/*
