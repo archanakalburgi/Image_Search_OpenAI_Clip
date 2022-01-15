@@ -7,3 +7,4 @@ USER_UPLOAD_FOLDER = "static/user/uploads/"
 USER_SEARCH_IMAGE = "static/user/search_image/"
 SQL_SCRIPT_PATH = "sql/schema.sql" 
 MODEL_DOWNLOAD_PATH = "models"
+NUM_OF_NEAREST_NEIGHBORS = 10

@@ -24,7 +24,9 @@ def text_search(search_term):
     with torch.no_grad():
         text_vec = model.encode_text(search_term_token).float()
 
-    ids = search_index.get_nns_by_vector(text_vec.tolist()[0], 10)
+    ids = search_index.get_nns_by_vector(
+        text_vec.tolist()[0], config.NUM_OF_NEAREST_NEIGHBORS, include_distances=True
+    )
     return ids
 
 
@@ -34,9 +36,10 @@ def image_search(search_image_path):
     image = preprocess(image_path).unsqueeze(0).to(device)
     image_vector = torch.tensor(image).to(device)
     with torch.no_grad():
-        output = model.encode_image(image_vector).float()
-        out_vec = output.tolist()[0]
-    ids = search_index.get_nns_by_vector(out_vec, 10)
+        image_vec = model.encode_image(image_vector).float()
+    ids = search_index.get_nns_by_vector(
+        image_vec.tolist()[0], config.NUM_OF_NEAREST_NEIGHBORS, include_distances=True
+    )
     return ids
 
 
@@ -50,5 +53,5 @@ def search(search_type, search_term_or_image_path):
         ids = image_search(search_term_or_image_path)
     else:
         ids = []
-    return db_util.get_image_from_database(ids)
-
+    # print(ids[1]) to make decision based on distace seems hard.
+    return db_util.get_image_from_database(ids[0])
