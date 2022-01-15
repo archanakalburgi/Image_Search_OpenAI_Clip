@@ -49,20 +49,11 @@ if __name__ == "__main__":
     """
     script_args = sys.argv[1:]
     if (len(script_args)) < 1:
-        print("Please provide the path to the images folder")
+        logging.info("Please provide the path to the images folder")
     if (len(script_args)) > 1:
-        print("Please specify folder, and images will be recursively found")
+        logging.info("Please specify folder, and images will be recursively found")
     else:
         os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
         folder_path = script_args[0]
         images = _move_all_files_to_uploads(folder_path, config.IMAGES_UPLOAD_PATH)
         annoy_reindex.reindex_annoy_and_update_database(images)
-    # os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
-    # if initial_run:
-    #     source_path = path.joinpath(images_path)
-    #     print(f"Loading from {source_path}")
-    #     images = move_all_files_to_uploads(source_path, config.IMAGES_UPLOAD_PATH)
-    #     print(len(images))
-    #     annoy_reindex.reindex_annoy_and_update_database(images)
-    # else:
-    #     print("handling just uploads")

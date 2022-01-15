@@ -4,6 +4,7 @@ from PIL import Image
 from annoy import AnnoyIndex
 
 from . import config
+import logging
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 search_index = AnnoyIndex(
@@ -16,7 +17,7 @@ model, preprocess = clip.load("ViT-B/32", download_root=config.MODEL_DOWNLOAD_PA
 
 
 def text_search(search_term):
-    print("searching now")
+    logging.info(f"Searching for {search_term}")
     search_term_token = clip.tokenize(["This is " + desc for desc in [search_term]])
     with torch.no_grad():
         text_vec = model.encode_text(search_term_token).float()
@@ -26,7 +27,7 @@ def text_search(search_term):
 
 
 def image_search(search_image_path):
-    print("searching now")
+    logging.info(f"Searching for {search_image_path}")
     image_path = Image.open(search_image_path).convert("RGB")
     image = preprocess(image_path).unsqueeze(0).to(device)
     image_vector = torch.tensor(image).to(device)

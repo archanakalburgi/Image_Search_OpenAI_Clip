@@ -10,7 +10,7 @@ import sqlite3
 
 import logging
 
-logging.basicConfig(filename="reindex.log", level=logging.DEBUG)
+logging.basicConfig(filename="app.log", level=logging.DEBUG)
 # logging.basicConfig(level=logging.DEBUG)
 
 """
