@@ -7,4 +7,4 @@ static/processed
 models
 *.ann
 .vscode
-*/__pycache__/*
+tests/__pycache__
