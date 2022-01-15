@@ -1,4 +1,4 @@
-[Image Search - Deployed](https://image-search-u9ue7.ondigitalocean.app/)
+Project is Deployed [here](https://image-search-ntmld.ondigitalocean.app/)
 
 # Search Image
 Two Features are implemented in this project.
