@@ -1,8 +1,8 @@
 import pytest
-import image_search_main
+import main_app
 
 
 @pytest.fixture
 def app():
-    app = image_search_main.create_app()
+    app = main_app.create_app()
     return app
