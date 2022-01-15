@@ -1,0 +1,5 @@
+pytest
+pytest-flask
+annoy==1.17.0
+git+https://github.com/openai/CLIP.git#egg=clip
+Flask==2.0.2
