@@ -63,7 +63,7 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 # Documentation
 1. [Decision Log](docs/decision_log.md)
 2. [Deployment](docs/deployment.md)
-3. [Updating Annoy Search Index](docs/how_to_use.md)
+3. [Updating Annoy Search Index](docs/update_index.md)
 
 
 # Development
