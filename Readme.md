@@ -68,7 +68,3 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 
 # Development
 Using Python 3.8.10 and Pyenv. Detail instructions and troubleshooting in [here](docs/development.md)
-# Idead about scaling
-Annoy has limitations
-Works batchbaed, we might wan to get to real time soon
-- https://milvus.io/bootcamp 

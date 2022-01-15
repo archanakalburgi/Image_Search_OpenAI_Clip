@@ -13,3 +13,13 @@
 - [Scann](https://github.com/google-research/google-research/tree/master/scann)
     - Readme says it supports linux primarily.
     - I have a mac and did not investigate this
+
+
+# Vector Searching - Annoy
+Sticking with annoy because it is simple and I have used in past. Will Speed up implementation.
+Limitations:
+- Cannot add vectors on fly. Will need to be generated offline and then update the API to use the file.
+
+
+# Implementing a Web App instead of a REST API
+API is an ideal choice for this project. Given that it is search and having something that has immediate visual feedback is a good for validation.  
