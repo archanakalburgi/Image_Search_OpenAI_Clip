@@ -1,7 +1,7 @@
 from flask import Flask, config, render_template, flash, request, redirect,url_for
 from werkzeug.utils import secure_filename
 import os
-import src.anny_search as ann
+import src.annoy_search as ann
 import sqlite3
 from flask import g
 

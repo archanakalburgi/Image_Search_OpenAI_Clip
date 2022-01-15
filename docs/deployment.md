@@ -7,7 +7,7 @@ If image building fails - https://stackoverflow.com/questions/44533319/how-to-as
 
 
 ## Heroku Deployment
-```
+```sh
 docker buildx build --platform linux/amd64 -t image-search .
 docker tag image-search registry.heroku.com/shrouded-citadel-51973/web
 docker push registry.heroku.com/shrouded-citadel-51973/web
@@ -17,7 +17,7 @@ Notes: Model needs atleast of 1GB of memory. and heroku free is very limited
 
 ## Digital Ocean - 
 Can use my eduction credit to deploy project, and deploy 
-```
+```sh
 docker buildx build --platform linux/amd64 -t image-search .
 docker tag image-search registry.digitalocean.com/image-search/image-search
 docker push registry.digitalocean.com/image-search/image-search

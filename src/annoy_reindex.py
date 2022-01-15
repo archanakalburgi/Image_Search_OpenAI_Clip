@@ -10,15 +10,17 @@ import sqlite3
 
 import logging
 
-# logging.basicConfig(filename='reindex.log',level=logging.DEBUG)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(filename="reindex.log", level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
-
+"""
+This need to be a data pipeline. Generating image feature is time consuming. GPUs can speed up the process.
+For distributed data procerssing we will a vector search engine which can store vectors from mutiple Workers.
+"""
 
 def _generate_vector_from_image(images, clip_model, model_preprocess):
     vectors = []
     for image_file in images:
-        # image_path = os.path.join(config.IMAGES_UPLOAD_PATH, image)
         image = (
             model_preprocess(Image.open(image_file).convert("RGB"))
             .unsqueeze(0)
@@ -41,7 +43,8 @@ def _write_vectors_and_images(conn, vectors, images):
     annoy_index = AnnoyIndex(config.VECTOR_SIZE, "angular")
     for idx, (vector, image) in enumerate(zip(vectors, images)):
         annoy_index.add_item(idx, vector)
-        conn.execute("INSERT OR REPLACE INTO images (id, title, image_path) VALUES (?, ?, ?)",
+        conn.execute(
+            "INSERT OR REPLACE INTO images (id, title, image_path) VALUES (?, ?, ?)",
             (idx, image, image),
         )
     conn.commit()
@@ -54,17 +57,10 @@ def _write_vectors_and_images(conn, vectors, images):
 
 
 
-"""
-Maybe right a thing to check for preconditons
-1. Database that exits
-2. Just create the uploads dir
-3. Delete ann file 
-"""
 def reindex_annoy_and_update_database(images):
+    logging.info(f"Processing {len(images)} images")
     os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
     conn = sqlite3.connect(config.DATABASE_PATH)
-    # images = _get_images_from_folder_to_staged(images_path, config.IMAGES_UPLOAD_PATH)
-    print("got so many", len(images))
     model, preprocess = clip.load("ViT-B/32", download_root=config.MODEL_DOWNLOAD_PATH)
     vectors = _generate_vector_from_image(images, model, preprocess)
     _write_vectors_and_images(conn, vectors, images)

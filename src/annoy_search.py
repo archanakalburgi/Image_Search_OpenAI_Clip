@@ -4,14 +4,16 @@ from PIL import Image
 from annoy import AnnoyIndex
 
 from . import config
-# from . import db_util
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-search_index = AnnoyIndex(config.VECTOR_SIZE, 'angular')  # Length of item vector that will be indexed
-search_index.load(config.ANNOY_INDEX_PATH) # this needs to be hot swappable, not sure how to do it.
-model, preprocess = clip.load("ViT-B/32",download_root=config.MODEL_DOWNLOAD_PATH)
+search_index = AnnoyIndex(
+    config.VECTOR_SIZE, "angular"
+)  # Length of item vector that will be indexed
+search_index.load(
+    config.ANNOY_INDEX_PATH
+)  # this needs to be hot swappable, not sure how to do it.
+model, preprocess = clip.load("ViT-B/32", download_root=config.MODEL_DOWNLOAD_PATH)
 
-#db connect
 
 def text_search(search_term):
     print("searching now")
@@ -21,6 +23,7 @@ def text_search(search_term):
 
     ids = search_index.get_nns_by_vector(text_vec.tolist()[0], 10)
     return ids
+
 
 def image_search(search_image_path):
     print("searching now")
@@ -32,4 +35,4 @@ def image_search(search_image_path):
         out_vec = output.tolist()[0]
     ids = search_index.get_nns_by_vector(out_vec, 10)
     return ids
-# search image has to be different functions.
+

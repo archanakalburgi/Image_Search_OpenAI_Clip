@@ -23,3 +23,7 @@ Limitations:
 
 # Implementing a Web App instead of a REST API
 API is an ideal choice for this project. Given that it is search and having something that has immediate visual feedback is a good for validation.  
+
+
+# Deploying
+This is good size application with different moving parts. Delploying to Heroku is something I have not done before this would be a great learning experience.

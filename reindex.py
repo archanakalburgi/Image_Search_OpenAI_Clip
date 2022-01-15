@@ -22,7 +22,8 @@ logging.basicConfig(level=logging.DEBUG)
 initial_run = True
 
 
-def move_all_files_to_uploads(image_folder_path, dest_path):
+def _move_all_files_to_uploads(image_folder_path, dest_path):
+    logging.info(f"Moving all files from {image_folder_path} to {dest_path}")
     image_files = [
         file
         for file in list(glob.iglob(image_folder_path + "**", recursive=True))
@@ -50,11 +51,11 @@ if __name__ == "__main__":
     if (len(script_args)) < 1:
         print("Please provide the path to the images folder")
     if (len(script_args)) > 1:
-        print("Please a folder, and images will be recursively found")
+        print("Please specify folder, and images will be recursively found")
     else:
         os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
         folder_path = script_args[0]
-        images = move_all_files_to_uploads(folder_path, config.IMAGES_UPLOAD_PATH)
+        images = _move_all_files_to_uploads(folder_path, config.IMAGES_UPLOAD_PATH)
         annoy_reindex.reindex_annoy_and_update_database(images)
     # os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
     # if initial_run:

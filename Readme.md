@@ -8,7 +8,7 @@ Two Features are implemented in this project.
 # How it is done.
 Embedding for a images in Image Repository are generated and stored in annoay index.
 
-Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) pretrained model.
+Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) pre-trained model. More details [Here](docs/semantic_search.md).
 
 
 # Application Design and Data Processing

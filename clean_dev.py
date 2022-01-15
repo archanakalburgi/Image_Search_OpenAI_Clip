@@ -16,6 +16,7 @@ Warning: Will move database, images and annoy index to backup folder.
 # logging.basicConfig(filename='data_pipeline.log',level=logging.DEBUG)
 logging.basicConfig(level=logging.DEBUG)
 
+
 def _get_database_connection(database_path):
     conn = sqlite3.connect(database_path)
     return conn
