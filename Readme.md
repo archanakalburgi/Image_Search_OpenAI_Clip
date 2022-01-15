@@ -1,9 +1,30 @@
-# Plan
+[Image Search - Deployed](https://image-search-u9ue7.ondigitalocean.app/)
+
+# Search Image
+Two Features are implemented in this project.
+1. Search Image from text.
+2. Search Image from image. or Similar Image Search.
+
+# How it is done.
+Embedding for a images in Image Repository are generated and stored in annoay index.
+
+Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) pretrained model.
+
+
+# Application Design and Data Processing
 Store all the image feature in to annoy tree and save the file on to the disk. 
 ![wd](plan.svg)
 
 
-## Implementation Plan
+# Future Extensions
+1. Pipeline setup to ingest hourly or daily based on amount of new images.
+2. Making it scale to beyond 100,000 images. 
+    - GPUs to generate embeddings in parallel.
+    - A vector search engine like [Milvus](https://milvus.io)
+3. Move to FastAPI from Flask making this application usable in multiple places eg mobile.
+
+
+# Implementation Plan
 ### V1
 - [x] Make sure the plan is doable MVP (in ipynb)
     - [x] Annoy tree store and retrive - done
@@ -31,23 +52,22 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 - [ ] Host all image assets on GCS or Digital Ocean Storage  - Will also reduce the image size.
 
 
-## Assumptions
-- Should be able to see the work, without any installation.
-- Should be able to run the project in 10 min.  - docker or script
-- Should be able feel what this project is about without having to get the whole thing running
+# Goals
+- Should be able to see the work, without any installation. (Deployed version)
+- Should be able to run the project in 10 min. (docker or simple <5 steps>
+- Should be able get a feel of what this project is about without having to get the whole thing running
     - Host it on heroku?
     - Make a docker image? so that it just runs (docker is everywhere?)
 
 
+# Documentation
+1. [Decision Log](docs/decision_log.md)
+2. [Deployment](docs/deployment.md)
+3. [Updating Annoy Search Index](docs/how_to_use.md)
 
 
-# Why annoy 
-
-# Auth is tricy
-# Limitations
-- Batch based, annoy tree cannot be updated in real time.
-
-
+# Development
+Using Python 3.8.10 and Pyenv. Detail instructions and troubleshooting in [here](docs/development.md)
 # Idead about scaling
 Annoy has limitations
 Works batchbaed, we might wan to get to real time soon
