@@ -3,6 +3,8 @@ import clip
 from PIL import Image
 from annoy import AnnoyIndex
 
+from src import db_util
+
 from . import config
 import logging
 
@@ -37,10 +39,16 @@ def image_search(search_image_path):
     ids = search_index.get_nns_by_vector(out_vec, 10)
     return ids
 
+
 def search(search_type, search_term_or_image_path):
+    """
+    How to handle the when distance is too high? what is to high?
+    """
     if search_type == "text":
         ids = text_search(search_term_or_image_path)
-    else:
+    elif search_type == "image":
         ids = image_search(search_term_or_image_path)
-    return ids
+    else:
+        ids = []
+    return db_util.get_image_from_database(ids)
 

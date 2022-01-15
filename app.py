@@ -3,8 +3,6 @@ from werkzeug.utils import secure_filename
 import os
 import src.annoy_search as ann
 from flask import g
-import src.db_util as dbutil
-
 import src.config as config
 
 
@@ -32,7 +30,7 @@ def allowed_file(filename):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    images = dbutil.get_image_from_database([])
+    images = ann.search(search_type=None, search_term_or_image_path=None)
     return render_template('index.html', images=images)
 
 @app.route('/display/<filename>')
@@ -75,20 +73,17 @@ def search():
             file_saved_path = os.path.join(app.config['USER_SEARCH_IMAGE'], filename)
             file.save(file_saved_path)
             flash('Image successfully uploaded, looking for similar images')
-            ids = ann.image_search(file_saved_path)
-            ids = ann.search("image", file_saved_path)
-            images = dbutil.get_image_from_database(ids)
+            images = ann.search("image", file_saved_path)
             return render_template('index.html', images=images)
         else:
             flash('Allowed image types are -> png, jpg, jpeg')
             return redirect(request.url)
     elif request.args['search']:
-        ids = ann.search("text", request.args['search'])
-        images = dbutil.get_image_from_database(ids)
+        images = ann.search("text", request.args['search'])
         return render_template('index.html', images=images)
     else:
         flash('Please enter a search term or upload an image to search by', category='error')
-        return render_template('index.html', images=dbutil.get_image_from_database([]))
+        return render_template('index.html', images=ann.search(None, None))
         
 
 if __name__ == '__main__':
