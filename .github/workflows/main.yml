@@ -28,6 +28,9 @@ jobs:
         - name: Checkout
           uses: actions/checkout@v2
 
+        - name: Install dependencies
+          run: pip install -r requirements_dev.txt
+
         - name: Regenerate Index
           run: python reindex.py static/uploads
           
