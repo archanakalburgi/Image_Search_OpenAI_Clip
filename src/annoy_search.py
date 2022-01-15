@@ -9,7 +9,7 @@ from . import config
 import logging
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
-search_index = AnnoyIndex(config.VECTOR_SIZE, "angular")
+search_index = AnnoyIndex(config.VECTOR_SIZE, config.ANNOY_METRIC)
 
 search_index.load(config.ANNOY_INDEX_PATH)
 model, preprocess = clip.load("ViT-B/32", download_root=config.MODEL_DOWNLOAD_PATH)

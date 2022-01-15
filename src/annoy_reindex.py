@@ -40,7 +40,7 @@ def _write_vectors_and_images(conn, vectors, images):
     Index needs to be constent across annoy index and the database, that is how we are doing to refer to it later.
 
     """
-    annoy_index = AnnoyIndex(config.VECTOR_SIZE, "angular")
+    annoy_index = AnnoyIndex(config.VECTOR_SIZE, config.ANNOY_METRIC)
     for idx, (vector, image) in enumerate(zip(vectors, images)):
         annoy_index.add_item(idx, vector)
         conn.execute(

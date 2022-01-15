@@ -27,9 +27,13 @@ jobs:
             python-version: '3.8'
         - name: Checkout
           uses: actions/checkout@v2
+
+        - name: Regenerate Index
+          run: python reindex.py static/uploads
+          
         - name: Pytest Action Step
           id: pytest
           uses: paolorechia/fast-pytest-github-action@develop
           with:
-            pytest_args: 'tests/'
+            pytest_args: 'tests'
             requirements_file: 'requirements_dev.txt'
