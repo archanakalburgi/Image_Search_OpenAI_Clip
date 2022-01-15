@@ -4,6 +4,7 @@ import os
 import src.annoy_search as ann
 import sqlite3
 from flask import g
+import src.db_util as dbutil
 
 import src.config as config
 
@@ -18,12 +19,6 @@ app.config['USER_SEARCH_IMAGE'] = config.USER_SEARCH_IMAGE
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(config.DATABASE_PATH)
-        db.row_factory = sqlite3.Row
-    return db
 
 @app.teardown_appcontext
 def close_connection(exception):
@@ -32,20 +27,13 @@ def close_connection(exception):
         db.close()
 
 
-def query_db(query, args=(), one=False):
-    cur = get_db().execute(query, args)
-    rv = cur.fetchall()
-    cur.close()
-    return (rv[0] if rv else None) if one else rv
-
-
 def allowed_file(filename):
 	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    images = query_db('SELECT * FROM images limit 16')
+    images = dbutil.get_image_from_database([])
     return render_template('index.html', images=images)
 
 @app.route('/display/<filename>')
@@ -89,14 +77,14 @@ def search():
             file.save(file_saved_path)
             flash('Image successfully uploaded, looking for similar images')
             ids = ann.image_search(file_saved_path)
-            images = query_db('SELECT * FROM images WHERE id IN ({})'.format(','.join(map(str, ids))))    
+            images = dbutil.get_image_from_database(ids)
             return render_template('index.html', images=images)
         else:
             flash('Allowed image types are -> png, jpg, jpeg')
             return redirect(request.url)
     else:
         ids = ann.text_search(request.args['search'])
-        images = query_db('SELECT * FROM images WHERE id IN ({})'.format(','.join(map(str, ids))))
+        images = dbutil.get_image_from_database(ids)
         return render_template('index.html', images=images)
 
 if __name__ == '__main__':
