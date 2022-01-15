@@ -13,7 +13,7 @@ Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) p
 
 # Application Design and Data Processing
 Store all the image feature in to annoy tree and save the file on to the disk. 
-![wd](plan.svg)
+![wd](docs/plan.svg)
 
 
 # Future Extensions
