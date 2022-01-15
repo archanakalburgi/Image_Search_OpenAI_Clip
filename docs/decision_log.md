@@ -1,0 +1,15 @@
+# Vector Searching
+- [Annoy](https://github.com/spotify/annoy)
+    - Annoying part is, it is based on a file. 
+    - And that file needs to be shipped around and vectors cannot be added on fly. Which is good and bad.
+    - I have used this before, it is simple to use no complicated setup.
+- [Faiss](https://github.com/facebookresearch/faiss)
+    - Looks like the vectors can be added on fly.
+    - Might not be great 
+- [Hnsw](https://github.com/nmslib/hnswlib)
+    - Very similar to annoy, with added bonus of being able to add vectors on fly.
+    - This might be a good fit for what goals I have with this project.  
+    - Wish to get a prototype of this.
+- [Scann](https://github.com/google-research/google-research/tree/master/scann)
+    - Readme says it supports linux primarily.
+    - I have a mac and did not investigate this

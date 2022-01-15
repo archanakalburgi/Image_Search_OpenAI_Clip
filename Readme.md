@@ -54,7 +54,7 @@ Store all the image feature in to annoy tree and save the file on to the disk.
 
 # Goals
 - Should be able to see the work, without any installation. (Deployed version)
-- Should be able to run the project in 10 min. (docker or simple <5 steps>
+- Should be able to run the project in 10 min. (docker or simple <5 steps)
 - Should be able get a feel of what this project is about without having to get the whole thing running
     - Host it on heroku?
     - Make a docker image? so that it just runs (docker is everywhere?)
