@@ -2,7 +2,6 @@ from flask import Flask, config, render_template, flash, request, redirect,url_f
 from werkzeug.utils import secure_filename
 import os
 import src.annoy_search as ann
-import sqlite3
 from flask import g
 import src.db_util as dbutil
 
@@ -77,15 +76,20 @@ def search():
             file.save(file_saved_path)
             flash('Image successfully uploaded, looking for similar images')
             ids = ann.image_search(file_saved_path)
+            ids = ann.search("image", file_saved_path)
             images = dbutil.get_image_from_database(ids)
             return render_template('index.html', images=images)
         else:
             flash('Allowed image types are -> png, jpg, jpeg')
             return redirect(request.url)
-    else:
-        ids = ann.text_search(request.args['search'])
+    elif request.args['search']:
+        ids = ann.search("text", request.args['search'])
         images = dbutil.get_image_from_database(ids)
         return render_template('index.html', images=images)
+    else:
+        flash('Please enter a search term or upload an image to search by', category='error')
+        return render_template('index.html', images=dbutil.get_image_from_database([]))
+        
 
 if __name__ == '__main__':
     os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True) # not good a good idea for production

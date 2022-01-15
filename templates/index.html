@@ -2,28 +2,38 @@
 
 {% block content %}
 
-{% with messages = get_flashed_messages() %}
+{% with messages = get_flashed_messages(with_categories=True) %}
 {% if messages %}
-  <ul>
-  {% for message in messages %}
-    
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
+<ul>
+    {% for (error,message) in messages %}
+
+    {% if error %}
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
-  {% endfor %}
-  </ul>
+
+    {%else%}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+
+    {% endfor %}
+</ul>
 {% endif %}
 {% endwith %}
 
 <div class="container">
 
-    <div class="row shadow p-3 mb-5 bg-white rounded" >
+    <div class="row shadow p-3 mb-5 bg-white rounded">
         <div class="col-md-6">
             <legend>Search By Text</legend>
             <form method="get" action="/search" enctype="multipart/form-data" class="shadow p-3 mb-5 bg-white rounded">
                 <div class="mb-3">
-                    <input type="text" name="search" class="form-control" autocomplete="off" placeholder="eg shoe" required>
+                    <input type="text" name="search" class="form-control" autocomplete="off" placeholder="eg shoe"
+                        required>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -34,8 +44,8 @@
             <legend>Search by Image</legend>
             <form method="POST" action="/search" enctype="multipart/form-data" class="shadow p-3 mb-5 bg-white rounded">
                 <div class="mb-3">
-                    <input type="file" name="file" class="form-control" autocomplete="off" placeholder="Search Product by image"
-                        required>
+                    <input type="file" name="file" class="form-control" autocomplete="off"
+                        placeholder="Search Product by image" required>
                 </div>
                 <div class="mb-3">
                     <button type="submit" class="btn btn-primary">Submit</button>

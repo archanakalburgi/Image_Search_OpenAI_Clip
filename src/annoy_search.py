@@ -37,3 +37,10 @@ def image_search(search_image_path):
     ids = search_index.get_nns_by_vector(out_vec, 10)
     return ids
 
+def search(search_type, search_term_or_image_path):
+    if search_type == "text":
+        ids = text_search(search_term_or_image_path)
+    else:
+        ids = image_search(search_term_or_image_path)
+    return ids
+
