@@ -1,13 +1,13 @@
 # Local Dev Setup
 We will be using pyenv.
 
+```bash
 pyenv virtualenv 3.8.10 shop
 pyenv activate shop
 eval "$(pyenv init --path)"
-pip install annoy
-pip install ftfy regex tqdm
-pip install git+https://github.com/openai/CLIP.git
-
+pip install -r requirements.txt
+python app.py 
+```
 
 # PORT 
 on Mac 5000 is used by control center. So using a different port.
