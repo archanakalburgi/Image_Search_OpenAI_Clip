@@ -27,3 +27,8 @@ API is an ideal choice for this project. Given that it is search and having some
 
 # Deploying
 This is good size application with different moving parts. Delploying to Heroku is something I have not done before this would be a great learning experience.
+
+
+# Decision to upload 25k images to Github.
+This is an odd decision that I made. The primary reason was to get something working on dev machine as quickly as possible without a lot of setup instructions. 
+In a real world application we would store images in GCS and have CDN serve the images.
