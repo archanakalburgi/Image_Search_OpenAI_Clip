@@ -5,6 +5,5 @@ backups
 *.log
 static/processed
 models
-*.ann
 .vscode
 tests/__pycache__
