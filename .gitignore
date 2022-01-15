@@ -8,3 +8,4 @@ backups
 static/processed
 models
 *.ann
+.vscode
