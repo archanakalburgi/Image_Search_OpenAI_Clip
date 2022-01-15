@@ -6,7 +6,7 @@ Two Features are implemented in this project.
 2. Search Image from image. or Similar Image Search.
 
 # How it is done.
-Embedding for a images in Image Repository are generated and stored in annoay index.
+Embedding for a images in image Repository are generated and stored in annoy index.
 
 Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) pre-trained model. More details [Here](docs/semantic_search.md).
 
@@ -22,6 +22,7 @@ Store all the image feature in to annoy tree and save the file on to the disk.
     - GPUs to generate embeddings in parallel.
     - A vector search engine like [Milvus](https://milvus.io)
 3. Move to FastAPI from Flask making this application usable in multiple places eg mobile.
+4. As the model is designed to learn from natural language and image, we can fine tune the model to learn from live data and images.
 
 
 # Implementation Plan
