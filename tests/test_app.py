@@ -32,6 +32,7 @@ def test_should_return_redirect_if_not_image(client):
     )
     assert resp.status_code == 302
 
+
 def test_should_return_redirect_if_image_is_too_big(client):
     resp = client.post(
         url_for("upload"),
@@ -47,7 +48,7 @@ def test_should_return_redirect_if_image_is_too_big(client):
 
 def test_images_can_searched_with_images(client):
     """
-    Goal of this test is to make sure annoy sql and views are working together. 
+    Goal of this test is to make sure annoy sql and views are working together.
     Annoy and sql will be tested  separately.
     """
     resp = client.post(
@@ -59,4 +60,13 @@ def test_images_can_searched_with_images(client):
             )
         },
     )
+    assert resp.status_code == 200
+
+
+def test_search_images_by_text(client):
+    """
+    Goal of this test is to make sure annoy sql and views are working together.
+    Annoy and sql will be tested  separately.
+    """
+    resp = client.get(url_for("search", search="shoe"))
     assert resp.status_code == 200
