@@ -9,5 +9,4 @@ models
 tests/__pycache__
 cache/models/
 *__pycache__*
-static/user/uploads/
 static/search_images/
