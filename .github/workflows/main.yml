@@ -62,5 +62,5 @@ jobs:
           with:
             context: .
             push: true
-            tags: image-search:latest
+            tags: ghcr.io/archanakalburgi/image-search:latest
             labels: ${{ steps.meta.outputs.labels }}
