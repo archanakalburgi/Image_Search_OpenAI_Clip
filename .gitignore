@@ -7,3 +7,5 @@ static/processed
 models
 .vscode
 tests/__pycache__
+cache/models/
+*__pycache__*

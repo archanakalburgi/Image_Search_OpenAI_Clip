@@ -16,8 +16,8 @@ from src import config
 import glob
 import sys
 
-# logging.basicConfig(filename='reindex.log',level=logging.DEBUG)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(filename='reindex.log',level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 initial_run = True
 
@@ -53,6 +53,7 @@ if __name__ == "__main__":
     if (len(script_args)) > 1:
         logging.info("Please specify folder, and images will be recursively found")
     else:
+        logging.info(f"Processing images in {script_args}")
         os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
         folder_path = script_args[0]
         images = _move_all_files_to_uploads(folder_path, config.IMAGES_UPLOAD_PATH)

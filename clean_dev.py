@@ -70,6 +70,9 @@ def main():
     Please make sure config.py is set up correctly.
     """
     logging.info("Starting data pipeline")
+    os.makedirs(config.DATABASE_PATH, exist_ok=True)
+    os.makedirs(config.MODEL_DOWNLOAD_PATH, exist_ok=True)
+    os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
     _if_file_exists_backup(config.DATABASE_PATH, "database")
     _if_file_exists_backup(config.IMAGES_UPLOAD_PATH, "images")
     # _if_file_exists_backup(config.IMAGES_PROCESSED_PATH, "images-processed")

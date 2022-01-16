@@ -10,5 +10,5 @@ RUN pip install -r requirements.txt
 
 COPY . .
 EXPOSE 5050
-CMD [ "python", "app.py" ]
+CMD [ "python", "main_app.py" ]
 

@@ -38,6 +38,11 @@ def create_app():
     def display_image(filename):
         return redirect(url_for('static', filename='uploads/' + filename), code=301)
 
+    @app.route('/display_user/<filename>')
+    def display_user_image(filename):
+        return redirect(url_for('static', filename='user/uploads/' + filename), code=301)
+
+
     @app.route('/upload', methods=['POST', 'GET'])
     def upload():
         if request.method == 'POST':
