@@ -9,7 +9,6 @@ The filename for the images is assumed to be unique.(The controller that handled
 
 import src.annoy_reindex as annoy_reindex
 import os
-import pathlib
 import logging
 import shutil
 from src import config

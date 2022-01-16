@@ -1,3 +1,9 @@
+"""
+TODO: Move this to flaks's config.
+For this application is not too critical as I do not have multiple env
+"""
+
+
 VECTOR_SIZE = 512
 DATABASE_PATH = "cache/database.db"
 ANNOY_INDEX_PATH = "cache/index.ann"

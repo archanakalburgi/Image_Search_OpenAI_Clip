@@ -2,6 +2,7 @@ import os
 
 import sqlite3
 import src.config as config
+from src import db_util
 from datetime import datetime
 import shutil
 import logging
@@ -20,14 +21,6 @@ logging.basicConfig(level=logging.DEBUG)
 def _get_database_connection(database_path):
     conn = sqlite3.connect(database_path)
     return conn
-
-
-def _create_database(conn, schema_file_path):
-    logging.info("Creating database")
-    with open(schema_file_path, "r") as f:
-        conn.executescript(f.read())
-    conn.commit()
-    logging.info("Database created")
 
 
 def _date_suffix():  # TODO test this
@@ -77,7 +70,7 @@ def main():
     _if_file_exists_backup(config.IMAGES_UPLOAD_PATH, "images")
     # _if_file_exists_backup(config.IMAGES_PROCESSED_PATH, "images-processed")
     conn = _get_database_connection(config.DATABASE_PATH)
-    _create_database(conn, config.SQL_SCRIPT_PATH)
+    db_util.create_database(conn, config.SQL_SCRIPT_PATH)
     return
 
 

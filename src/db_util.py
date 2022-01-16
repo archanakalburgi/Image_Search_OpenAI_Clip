@@ -2,6 +2,8 @@ import sqlite3
 from . import config
 from flask import g
 import random
+import logging
+
 
 def _get_db():
     db = getattr(g, '_database', None)
@@ -10,6 +12,12 @@ def _get_db():
         db.row_factory = sqlite3.Row
     return db
 
+def create_database(conn, schema_file_path):
+    logging.info("Creating database")
+    with open(schema_file_path, "r") as f:
+        conn.executescript(f.read())
+    conn.commit()
+    logging.info("Database created")
 
 def _query_db(query, args=(), one=False):
     cur = _get_db().execute(query, args)
@@ -27,3 +35,4 @@ def get_image_from_database(ids):
         ids = [random.randint(1, 1000) for _ in range(10)]
     query = "SELECT * FROM images WHERE id IN ({ids})".format(ids=",".join(map(str,ids)))
     return _query_db(query)
+

@@ -11,7 +11,6 @@ import sqlite3
 import logging
 
 logging.basicConfig(filename="app.log", level=logging.DEBUG)
-# logging.basicConfig(level=logging.DEBUG)
 
 """
 This need to be a data pipeline. Generating image feature is time consuming. GPUs can speed up the process.
@@ -48,6 +47,7 @@ def _write_vectors_and_images(conn, vectors, images):
             (idx, image, image),
         )
     conn.commit()
+    print("Writing annoy index", config.ANNOY_INDEX_PATH)
     logging.info(
         f"Writing {len(vectors)} vectors to annoy index at {config.ANNOY_INDEX_PATH}"
     )
