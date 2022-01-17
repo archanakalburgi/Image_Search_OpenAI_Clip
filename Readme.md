@@ -43,7 +43,7 @@ The major components and data flow of the project are as follows:
    - [x] Image feature extraction - done
    - [x] Image search is it any good? - Good, as far as we have a good amount of images indexed
 - [x] Back End - (Using flask)
-   - [x] API to search - Building a react app would be nice, but time-consuming. Consuming. So using Flask Views
+   - [x] API to search - Building a react app would be nice, but time-consuming.So using Flask Views
    - [x] API to upload image for search - Done
    - [X] API to add images to repo(may be) - Images can be uploaded by the user to index. But index is batch based, would need be done by the user. In future we can add a airflow job to run every hour to keep the index updated.
 - [x] Front End - (Using boot strap)
