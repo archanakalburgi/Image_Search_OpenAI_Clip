@@ -16,7 +16,7 @@ Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) p
 
 # Application Design and Data Processing
 Put all the image features into the annoy tree and save the file to the disk.
-![](docs/acch_diag.png)
+![](docs/arch_diag.png)
 
 
 # Future Extensions
