@@ -32,3 +32,7 @@ This is good size application with different moving parts. Delploying to Heroku 
 # Decision to upload 25k images to Github.
 This is an odd decision that I made. The primary reason was to get something working on dev machine as quickly as possible without a lot of setup instructions. 
 In a real world application we would store images in GCS and have CDN serve the images.
+
+
+## Security
+Security in this application is with respect to image size, file name and image type. The flask framework provides ways to setup authentication and authorization but for this project I have not used it. In future if the need be it can be added.

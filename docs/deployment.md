@@ -24,9 +24,3 @@ docker push registry.digitalocean.com/image-search/image-search
 ```
 Website live at [Here](https://image-search-ntmld.ondigitalocean.app/)<- Update this link before submitting.
 
-
-
-# Why does it take 3-4 min to start up a web server?
-If the application is running for the first time it will have to download the model. And the model is cached for the subsequent runs.
-
-I probably could package that up. The down side is it is ~300MB.

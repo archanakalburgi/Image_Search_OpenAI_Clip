@@ -1,7 +1,7 @@
 
 ![PyTest](https://github.com/archanakalburgi/shopify-dev-intern/actions/workflows/main.yml/badge.svg)
 
-Project is Deployed [here](https://image-search-ntmld.ondigitalocean.app/)
+### Project is Deployed [here](https://image-search-ntmld.ondigitalocean.app/)
 
 # Search Image
 Two features are implemented in this project.
@@ -18,14 +18,16 @@ Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) p
 Put all the image features into the annoy tree and save the file to the disk.
 ![](docs/arch_diag.png)
 
+# Running the Application and Testing
+Project uses [pyenv](https://github.com/pyenv/pyenv) and pytest for testing.
+Detail instructions and troubleshooting in [here](docs/local_dev_setup.md)
 
-# Future Extensions
-1. Pipeline setup to ingest hourly or daily based on amount of new images.
-2. Making it scale to beyond 100,000 images.
-   - GPUs to generate embeddings in parallel.
-   - A vector search engine like [Milvus](https://milvus.io)
-3. Move to FastAPI from Flask making this application usable in multiple places eg mobile.
-4. As the model is designed to learn from natural language and image, we can fine tune the model to learn from live data and images.
+# Possible Extensions
+1. Search API is designed in way it can be extracted to a REST API. Making the search API available to other applications.
+2. As the model is designed to learn from natural language and image, we can fine tune the model to learn from live data and images.
+3. Embedding Generation can be speeded up by using a GPU.
+4. Can be scaled with the same API to server more than 100k images using vector search engine like [Milvus](https://milvus.io)
+
 
 
 # Implementation Plan
@@ -69,5 +71,4 @@ Put all the image features into the annoy tree and save the file to the disk.
 - [Updating the Annoy Search Index](docs/update_index.md)
 
 
-# Development
-Using Python 3.8.10 and Pyenv. Detail instructions and troubleshooting in [here](docs/local_dev_setup.md)
+

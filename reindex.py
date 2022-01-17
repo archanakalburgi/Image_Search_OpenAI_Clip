@@ -23,15 +23,12 @@ initial_run = True
 
 def _move_all_files_to_uploads(image_folder_path, dest_path):
     logging.info(f"Moving all files from {image_folder_path} to {dest_path}")
-    print(f"Moving all files from {image_folder_path} to {dest_path}")
     image_files = [
         file
         for file in list(glob.iglob(image_folder_path + "**", recursive=True))
         if file.endswith(".png") or file.endswith(".jpg")
     ]
-    images_copy = []
     logging.info(f"{len(image_files)} images found in {image_folder_path}")
-
     # May be move them to staged, and then read from staged. which might be annothing
     return image_files
 

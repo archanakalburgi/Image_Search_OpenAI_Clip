@@ -10,6 +10,36 @@ pip install -r requirements.txt
 python main_app.py 
 ```
 
+
+# Testing
+```bash
+pip install -r requirements_dev.txt
+pytest tests
+```
+
+# Test Coverage
+```bash
+pytest --cov=src --cov-report=html
+```
+Here is the sample report:
+```
+---------- coverage: platform darwin, python 3.8.10-final-0 ----------
+Name                   Stmts   Miss  Cover
+------------------------------------------
+src/__init__.py            0      0   100%
+src/annoy_reindex.py      39      0   100%
+src/annoy_search.py       34      0   100%
+src/config.py             12      0   100%
+src/db_util.py            27      0   100%
+------------------------------------------
+TOTAL                    112      0   100%
+
+======================================================= 10 passed, 4 warnings in 2.72s ========================================================
+(anno-ver) ➜  shopify-dev-intern git:(main) ✗
+```
+
+
+
 # PORT 
 on Mac 5000 is used by control center. So using a different port.
 
@@ -20,9 +50,11 @@ python3 install.py
 python3 reindex.py
 ```
 2. Run via docker
+docker build -t image-search:latest .
 docker run  -p 5550:5550 image-search
 
-# Troubleshooting
+# FAQ
+
 ## Lza - Not Found error
 Fixed by  PYTHON_CONFIGURE_OPTS="--enable-framework" pyenv install 3.8.10
 
@@ -42,3 +74,8 @@ Fixed by running following commands
 python clean_dev.py
 python reindex.py static/uploads/
 ```
+
+## Why does it take 3-4 min to start up a web server?
+If the application is running for the first time it will have to download the model. And the model is cached for the subsequent runs.
+
+I probably could package that up. The down side is it is ~300MB.
