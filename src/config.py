@@ -6,6 +6,7 @@ For this application is not too critical as I do not have multiple env
 
 VECTOR_SIZE = 512
 DATABASE_PATH = "cache/database.db"
+CACHE_DIR = "cache"
 ANNOY_INDEX_PATH = "cache/index.ann"
 BACK_UP_PATH = "backups"
 IMAGES_UPLOAD_PATH = "static/uploads/"

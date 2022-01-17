@@ -14,8 +14,8 @@ Script is useful to clean everything up and start fresh.
 Warning: Will move database, images and annoy index to backup folder.
 """
 
-# logging.basicConfig(filename='data_pipeline.log',level=logging.DEBUG)
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(filename='app.log',level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
 
 
 def _get_database_connection(database_path):
@@ -63,16 +63,14 @@ def main():
     Please make sure config.py is set up correctly.
     """
     logging.info("Starting data pipeline")
-    os.makedirs(config.DATABASE_PATH, exist_ok=True)
+    os.makedirs(config.CACHE_DIR, exist_ok=True)
     os.makedirs(config.MODEL_DOWNLOAD_PATH, exist_ok=True)
     os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
     _if_file_exists_backup(config.DATABASE_PATH, "database")
-    # _if_file_exists_backup(config.IMAGES_UPLOAD_PATH, "images")
-    # _if_file_exists_backup(config.IMAGES_PROCESSED_PATH, "images-processed")
+    _if_file_exists_backup(config.ANNOY_INDEX_PATH, "database")
     conn = _get_database_connection(config.DATABASE_PATH)
     db_util.create_database(conn, config.SQL_SCRIPT_PATH)
     return
-
 
 if __name__ == "__main__":
     main()

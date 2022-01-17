@@ -5,7 +5,7 @@
     - I have used this before, it is simple to use no complicated setup.
 - [Faiss](https://github.com/facebookresearch/faiss)
     - Looks like the vectors can be added on fly.
-    - Might not be great 
+    - This Might actually be great, sadly found out late. 
 - [Hnsw](https://github.com/nmslib/hnswlib)
     - Very similar to annoy, with added bonus of being able to add vectors on fly.
     - This might be a good fit for what goals I have with this project.  

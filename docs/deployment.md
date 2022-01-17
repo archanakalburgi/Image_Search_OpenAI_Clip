@@ -1,4 +1,6 @@
-# Building Docker image on M1 and running on Heroku
+# Deployment
+
+## Building Docker image on M1 and running on Heroku
 The Docker image is built on the M1 machine and then pushed to Heroku fails with a exec error. 
 
 The fix is described here: https://stackoverflow.com/questions/66982720/keep-running-into-the-same-deployment-error-exec-format-error-when-pushing-nod 
