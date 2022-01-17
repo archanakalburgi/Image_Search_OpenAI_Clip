@@ -67,7 +67,7 @@ def main():
     os.makedirs(config.MODEL_DOWNLOAD_PATH, exist_ok=True)
     os.makedirs(config.IMAGES_UPLOAD_PATH, exist_ok=True)
     _if_file_exists_backup(config.DATABASE_PATH, "database")
-    _if_file_exists_backup(config.IMAGES_UPLOAD_PATH, "images")
+    # _if_file_exists_backup(config.IMAGES_UPLOAD_PATH, "images")
     # _if_file_exists_backup(config.IMAGES_PROCESSED_PATH, "images-processed")
     conn = _get_database_connection(config.DATABASE_PATH)
     db_util.create_database(conn, config.SQL_SCRIPT_PATH)
