@@ -8,19 +8,20 @@ Two features are implemented in this project.
 1. Search Image from text.
 2. Search Image from image (Similar Image Search.)
 
-# How it is done.
+# How does it work.
 Embeddings for images in the image Repository are generated and stored in the annoy index.
 
 Embeedings are generated using OpenAI's [Clip](https://github.com/openai/CLIP) pre-trained model. More details [Here](docs/semantic_search.md).
 
+# How to Run and Test
+Project uses [pyenv](https://github.com/pyenv/pyenv) and pytest for testing.
+Detail instructions and troubleshooting in [here](docs/local_dev_setup.md)
 
 # Application Design and Data Processing
 Put all the image features into the annoy tree and save the file to the disk.
 ![](docs/arch_diag.png)
 
-# Running the Application and Testing
-Project uses [pyenv](https://github.com/pyenv/pyenv) and pytest for testing.
-Detail instructions and troubleshooting in [here](docs/local_dev_setup.md)
+
 
 # Possible Extensions
 1. Search API is designed in way it can be extracted to a REST API. Making the search API available to other applications.
