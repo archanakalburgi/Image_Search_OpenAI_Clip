@@ -23,7 +23,7 @@ Project uses [pyenv](https://github.com/pyenv/pyenv) and pytest for testing.
 Detail instructions and troubleshooting in [here](docs/local_dev_setup.md)
 
 # Application Design and Data Processing
-Put all the image features into the annoy tree and save the file to the disk.
+The major components and data flow of the project are as follows:
 ![](docs/arch_diag.png)
 
 
@@ -50,7 +50,7 @@ Put all the image features into the annoy tree and save the file to the disk.
    - [x] Grid of images limit to 16 images a page
    - [x] Search text box
    - [x] Search image box
-   - [ ] Make it look like it was made by an adult.
+   - [x] Make the user experience delightful
 - [x] Deployment
    - [x] local server setup instructions
    - [x] DockerFile so that it is easy to get the application running.
