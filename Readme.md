@@ -70,4 +70,4 @@ Put all the image features into the annoy tree and save the file to the disk.
 
 
 # Development
-Using Python 3.8.10 and Pyenv. Detail instructions and troubleshooting in [here](docs/development.md)
+Using Python 3.8.10 and Pyenv. Detail instructions and troubleshooting in [here](docs/local_dev_setup.md)
