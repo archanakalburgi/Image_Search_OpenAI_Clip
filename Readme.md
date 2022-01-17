@@ -66,9 +66,6 @@ The major components and data flow of the project are as follows:
 # Goals
 - Should be able to see the work, without any installation. (Deployed version)
 - Should be able to run the project in 10 min. (docker or simple <5 steps)
-- Should be able to get a feel of what this project is about without having to get the whole thing running
-   - Host it on Heroku?
-   - Make a Docker image? So that it just runs (docker is everywhere?)
 
 
 # Documentation
