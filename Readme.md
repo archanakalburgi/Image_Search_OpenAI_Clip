@@ -1,7 +1,7 @@
 
 ![PyTest](https://github.com/archanakalburgi/shopify-dev-intern/actions/workflows/main.yml/badge.svg)
 
-### Project is Deployed [here](https://image-search-ntmld.ondigitalocean.app/)
+### Project is Deployed [here](https://image-search-v2-fub6y.ondigitalocean.app/)
 
 # Search Image
 Two features are implemented in this project.
