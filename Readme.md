@@ -2,7 +2,7 @@
 ![PyTest](https://github.com/archanakalburgi/shopify-dev-intern/actions/workflows/main.yml/badge.svg)
 
 ### Project is Deployed [here](https://image-search-v2-fub6y.ondigitalocean.app/)
-Here are some  images you can upload and search by
+Here are some text and images examples you can add/upload and search by
 - [Salad](https://image-search-v2-fub6y.ondigitalocean.app/static/uploads/f4c0ea27.jpg)
 - [Shoe](https://image-search-v2-fub6y.ondigitalocean.app/static/uploads/f9560d1e.jpg)
 - [Clock](https://image-search-v2-fub6y.ondigitalocean.app/static/uploads/f40db01e.jpg)
