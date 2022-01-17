@@ -2,11 +2,12 @@
 We will be using pyenv.
 
 ```bash
+penv install 3.8.10
 pyenv virtualenv 3.8.10 shop
 pyenv activate shop
 eval "$(pyenv init --path)"
 pip install -r requirements.txt
-python app.py 
+python main_app.py 
 ```
 
 # PORT 
