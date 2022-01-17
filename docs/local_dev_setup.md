@@ -1,14 +1,18 @@
 # Local Dev Setup
 To run the app on your computer aas quickly as possible.
 
-Setup Python and [pyenv](https://github.com/pyenv/pyenv) 
+Python dev env is 
+Setup Python and [pyenv](https://github.com/pyenv/pyenv)  and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv).
 ```bash
-penv install 3.8.10
+pyenv install 3.8.10
 pyenv virtualenv 3.8.10 shop
-pyenv activate shop
 eval "$(pyenv init --path)"
+pyenv activate shop
+```
+
+```
 pip install -r requirements.txt
-pythin clean_dev.py
+python clean_dev.py
 python reindex.py static/user/uploads
 python main_app.py 
 ```

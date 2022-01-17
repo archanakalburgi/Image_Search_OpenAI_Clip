@@ -14,8 +14,14 @@ Script is useful to clean everything up and start fresh.
 Warning: Will move database, images and annoy index to backup folder.
 """
 
-logging.basicConfig(filename='app.log',level=logging.DEBUG)
-# logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("debug.log"),
+        logging.StreamHandler()
+    ]
+)
 
 
 def _get_database_connection(database_path):
