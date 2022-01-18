@@ -30,9 +30,11 @@ def get_image_from_database(ids):
     """
     Get image from sql for ids
     If the Ids are missing, we return 10 random images
+    
     """
     if not ids:
-        ids = [random.randint(1, 1000) for _ in range(10)]
-    query = "SELECT * FROM images WHERE id IN ({ids})".format(ids=",".join(map(str,ids)))
+        query = "SELECT * FROM images ORDER BY RANDOM() LIMIT 10"
+    else:
+        query = "SELECT * FROM images WHERE id IN ({ids})".format(ids=",".join(map(str,ids)))
     return _query_db(query)
 

@@ -42,6 +42,10 @@ def create_app():
     def display_user_image(filename):
         return redirect(url_for('static', filename='user/uploads/' + filename), code=301)
 
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
+
 
     @app.route('/upload', methods=['POST', 'GET'])
     def upload():
@@ -91,6 +95,7 @@ def create_app():
             flash('Please enter a search term or upload an image to search by', category='error')
             return render_template('index.html', images=ann.search(None, None))
     return app
+
         
 
 if __name__ == '__main__':
