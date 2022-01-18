@@ -96,3 +96,6 @@ Yes. heere is the image.
 docker pull ghcr.io/archanakalburgi/image-search:latest
 docker run  -p 5550:5550 image-search
 ```
+
+## Why is the repo so big?
+Partly because I have checked in images as the other alternatives complicated code and setup.
