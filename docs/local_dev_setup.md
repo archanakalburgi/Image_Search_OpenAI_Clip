@@ -1,7 +1,7 @@
 # Local Dev Setup
 To run the app on your computer aas quickly as possible.
 
-Python dev env is 
+
 Setup Python and [pyenv](https://github.com/pyenv/pyenv)  and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv).
 ```bash
 pyenv install 3.8.10
